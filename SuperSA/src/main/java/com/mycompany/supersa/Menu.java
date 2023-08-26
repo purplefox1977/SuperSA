@@ -59,6 +59,11 @@ public static TreeSet <Producto> listaProductos =new TreeSet<>();
         });
 
         jMenuItem1.setText("Productos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -109,12 +114,7 @@ public static TreeSet <Producto> listaProductos =new TreeSet<>();
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
-        GestionDeProductos gdp =new GestionDeProductos();
-        gdp.setVisible(true);
-        escritorio.add(gdp);
-        escritorio.moveToFront(gdp);  
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -152,6 +152,16 @@ public static TreeSet <Producto> listaProductos =new TreeSet<>();
         escritorio.add(bpnp);
         escritorio.moveToFront(bpnp);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionDeProductos gdp =new GestionDeProductos();
+        gdp.setVisible(true);
+        escritorio.add(gdp);
+        escritorio.moveToFront(gdp);  
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

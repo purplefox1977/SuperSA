@@ -105,8 +105,8 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
 
     private void jCBRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBRubroActionPerformed
         // TODO add your handling code here:
-                String categoria = jCBRubro.getSelectedItem().toString();
-             buscarFilas();
+            String categoria = jCBRubro.getSelectedItem().toString();
+            buscarFilas();
         for (Producto prod:Menu.listaProductos) {
 
             if (prod.getRubro().toString().equals(categoria)) {
@@ -128,7 +128,7 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTProductos;
     // End of variables declaration//GEN-END:variables
 
-        private void agregarCabecera(){
+    private void agregarCabecera(){
     
         modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
@@ -145,7 +145,7 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
             jCBRubro.addItem(String.valueOf(categoria));
         }
     }
-     private void buscarFilas(){
+    private void buscarFilas(){
         int  filas =jTProductos.getRowCount()-1;
         for(int f = filas;f >=0;f--){
             modelo.removeRow(f);    
