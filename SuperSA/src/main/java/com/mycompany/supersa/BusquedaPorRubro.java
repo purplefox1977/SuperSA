@@ -3,18 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package com.mycompany.supersa;
-
+    import javax.swing.JOptionPane;
+    import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Loboplateado77
  */
 public class BusquedaPorRubro extends javax.swing.JInternalFrame {
-
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
     /**
      * Creates new form BusquedaPorRubro
      */
     public BusquedaPorRubro() {
         initComponents();
+        agregarCabecera();// cargo cabecera tabla
+        cargarCombo(); // secarga el combobox --> categoria enum
     }
 
     /**
@@ -26,23 +33,122 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jCBRubro = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTProductos = new javax.swing.JTable();
+
         setClosable(true);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 255));
+        jLabel1.setText("Busqueda por Rubro");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel2.setText("Elija un rubro");
+
+        jCBRubro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBRubroActionPerformed(evt);
+            }
+        });
+
+        jTProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTProductos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jCBRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jCBRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCBRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBRubroActionPerformed
+        // TODO add your handling code here:
+                String categoria = jCBRubro.getSelectedItem().toString();
+             buscarFilas();
+        for (Producto prod:Menu.listaProductos) {
+
+            if (prod.getRubro().toString().equals(categoria)) {
+                    modelo.addRow(new Object[]{
+                    prod.getCodigo(),
+                    prod.getDescripcion(),
+                    prod.getPrecio(),
+                    prod.getStock(),
+            });
+        }  
+    } 
+    }//GEN-LAST:event_jCBRubroActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jCBRubro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTProductos;
     // End of variables declaration//GEN-END:variables
+
+        private void agregarCabecera(){
+    
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        
+        jTProductos.setModel(modelo);
+    }
+    public void cargarCombo(){
+
+            jCBRubro.addItem("");
+            Categoria[] categoriaList=Categoria.values();
+            for( Categoria categoria: categoriaList){
+            jCBRubro.addItem(String.valueOf(categoria));
+        }
+    }
+     private void buscarFilas(){
+        int  filas =jTProductos.getRowCount()-1;
+        for(int f = filas;f >=0;f--){
+            modelo.removeRow(f);    
+        }
+    }
 }

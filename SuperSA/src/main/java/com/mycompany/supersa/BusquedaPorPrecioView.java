@@ -9,7 +9,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Loboplateado77
  */
 public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo = new DefaultTableModel();
+private DefaultTableModel modelo = new DefaultTableModel(){
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
     /**
      * Creates new form BusquedaPorPrecioView
      */
