@@ -11,6 +11,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Menu extends javax.swing.JFrame {
 public static TreeSet <Producto> listaProductos =new TreeSet<>();
+
+    static void listaProductos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     /**
      * Creates new form Menu
      */

@@ -79,5 +79,10 @@ public class Producto implements Comparable<Producto>{
             return -1;        
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString(); //
+    }
     
 }
